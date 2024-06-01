@@ -1,0 +1,113 @@
+Algoritma
+
+1. 
+function reverseAlphabets(input) {
+    // Memisahkan array jadi perkata
+    let chars = input.split('');
+    // inisiasi array utk menampung kata
+    let alphabets = [];
+    // inisiasi digit
+    let digits = '';
+    
+    // iterasi kata2 untuk memisahkan alfabet dan digit
+    chars.forEach(char => {
+        if (isNaN(char)) {
+            // jika input != number, masukkan ke dalam array alpabet
+            alphabets.push(char);
+        } else {
+            // jika input = number, masukan ke digit
+            digits += char;
+        }
+    });
+    
+    // Balikkan kata di array alpabet
+    alphabets.reverse();
+    
+    // gabungkan alpabet dan digitnya.
+    return alphabets.join('') + digits;
+}
+
+let input = "NEGIE1";
+let result = reverseAlphabets(input);
+console.log(result); // Output: "EIGEN1"
+
+2. 
+function longest(sentence) {
+    // Memisahkan kalimat menjadi array kata-kata
+    let words = sentence.split(' ');
+    
+    // Menginisialisasi variabel untuk menyimpan kata terpanjang dan panjangnya
+    let longestWord = '';
+    let maxLength = 0;
+    
+    // Mengiterasi setiap kata dalam array
+    words.forEach(word => {
+        // Jika panjang kata saat ini lebih besar dari panjang maksimum yang ditemukan
+        if (word.length > maxLength) {
+            // Update kata terpanjang dan panjang maksimum
+            longestWord = word;
+            maxLength = word.length;
+        }
+    });
+    
+    // Mengembalikan kata terpanjang dan panjangnya
+    return `${longestWord}: ${maxLength} karakter`;
+}
+
+const sentence = "Saya sangat senang mengerjakan soal algoritma";
+console.log(longest(sentence)); 
+
+3. 
+function countOccurrences(INPUT, QUERY) {
+    // Membuat objek untuk menyimpan jumlah kemunculan setiap kata di INPUT
+    let inputCounts = {};
+
+    // Mengiterasi setiap kata di INPUT dan menghitung kemunculannya
+    INPUT.forEach(word => {
+        if (inputCounts[word]) {
+            inputCounts[word]++;
+        } else {
+            inputCounts[word] = 1;
+        }
+    });
+
+    // Membuat array untuk menyimpan hasil
+    let result = [];
+
+    // Mengiterasi setiap kata di QUERY dan mendapatkan jumlah kemunculannya dari inputCounts
+    QUERY.forEach(word => {
+        result.push(inputCounts[word] || 0);
+    });
+
+    return result;
+}
+
+// Contoh penggunaan
+const INPUT = ['xc', 'dz', 'bbb', 'dz'];
+const QUERY = ['bbb', 'ac', 'dz'];
+
+console.log(countOccurrences(INPUT, QUERY)); // Output: [1, 0, 2]
+
+4.
+function diagonalDifference(matrix) {
+// inisiasi variable
+    let n = matrix.length;
+    let primaryDiagonalSum = 0;
+    let secondaryDiagonalSum = 0;
+    // iterasi penjumlahan matrix diagonal kiri ke kanan dan kanan ke kiri
+    for (let i = 0; i < n; i++) {
+        primaryDiagonalSum += matrix[i][i];
+        secondaryDiagonalSum += matrix[i][n - i - 1];
+    }
+    // kurangi total jumlah dua diagonal tsb
+    return Math.abs(primaryDiagonalSum - secondaryDiagonalSum);
+}
+
+// Contoh penggunaan
+const matrix = [
+    [1, 2, 0],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+console.log(diagonalDifference(matrix)); // Output: 3
